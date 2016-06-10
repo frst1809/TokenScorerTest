@@ -1,4 +1,4 @@
-package com.lesse.tokenscore;
+package com.lesse.tokenscore.nlp;
 
 import java.io.IOException;
 import java.io.InputStream;
