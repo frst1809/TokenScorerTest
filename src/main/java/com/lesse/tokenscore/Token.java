@@ -1,13 +1,13 @@
 package com.lesse.tokenscore;
 
 public class Token {
-    String word;
+    Integer word;
     String pos;
     
-    public String getWord() {
+    public Integer getWord() {
         return word;
     }
-    public void setWord(String word) {
+    public void setWord(Integer word) {
         this.word = word;
     }
     public String getPos() {

@@ -21,6 +21,8 @@ public class DependencyTree {
     private static TreebankLanguagePack tlp = new PennTreebankLanguagePack();
     private static GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
     
+    
+    
     public static List<Triple> getTree(String sentence) {
         LexicalizedParser lp = LexicalizedParser.loadModel("edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz");
         lp.setOptionFlags(new String[]{"-maxLength", "500", "-retainTmpSubcategories"});
@@ -32,20 +34,17 @@ public class DependencyTree {
         Collection<TypedDependency> tdl = gsf.newGrammaticalStructure(tree)
                                                 .typedDependencies();
         
+        Dictionary dict = Dictionary.getInstance();
         
         List<Triple> depTree = new ArrayList<Triple>();
-        for (TypedDependency td : tdl) {
-            //System.out.println(td.gov().toString()
-            //        +"-"+td.reln().toString()+"->"
-            //        +td.dep().toString());
-            
+        for (TypedDependency td : tdl) {            
             Triple t = new Triple();
-            t.sub.setWord(td.gov().word());
+            t.sub.setWord(dict.putWord(td.gov().word()));
             t.sub.setPos(td.gov().tag());
             
             t.rel = td.reln().getShortName();
             
-            t.obj.setWord(td.dep().word());
+            t.obj.setWord(dict.putWord(td.dep().word()));
             t.obj.setPos(td.dep().tag());
             
             depTree.add(t);

@@ -7,9 +7,9 @@ public class Dictionary {
         words = new ArrayList<String>();
     }
     
-    private Dictionary dict;
+    private static Dictionary dict;
     
-    public Dictionary getInstance() {
+    public static Dictionary getInstance() {
         if (dict == null) {
             dict = new Dictionary();
         }
@@ -46,6 +46,16 @@ public class Dictionary {
         }
         
         return -1;
+    }
+    
+    public int getTotalSize() {
+        return words.size();
+    }
+    
+    public void printAllWord() {
+        for (int i=0; i < words.size(); i++) {
+            System.out.println(i+":"+words.get(i));
+        }
     }
     
 }
