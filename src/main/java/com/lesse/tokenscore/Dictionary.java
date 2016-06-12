@@ -36,6 +36,10 @@ public class Dictionary {
         return words.size()-1;
     }
     
+    public String getWord(Integer index) {
+        return words.get(index);
+    }
+    
     public int getWordIndex(String word) {
         if (isStopword(word)) {
             return -1;
