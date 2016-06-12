@@ -25,12 +25,54 @@ public class App
         //    System.out.println(t.toString());
         //}
         
-        // calculate word importance using pagelank algorithm
+        // calculate word importance using pageRank algorithm
         // dependency is link
         
+        // Issues
+        // 1) How to do sense selection
+        // 2) how to link pronoun to noun, this linkage is very important.
+        // 3) need to merge compound word : noun + noun, "a lot of"
+        // 4) And so on....
+        
+        // Anyway, calculate
+       
+        List<Node> nodes = new ArrayList<Node>();
+        for (Triple t : allDep) {
+            
+            int subObjIndex = nodes.indexOf(t.sub);
+            Node subNode = null;
+            if (subObjIndex < 0) {
+                subNode = new Node();
+                subNode.setToken(t.sub);
+                subObjIndex = nodes.size();
+                nodes.add(subNode);
+            } else {
+                subNode = nodes.get(subObjIndex);
+            }
+            
+            Node objNode = null;
+            int objNodeInddx = nodes.indexOf(t.obj);
+            if (objNodeInddx < 0) {
+                objNode = new Node();
+                objNode.setToken(t.obj);
+                objNodeInddx = nodes.size();
+                nodes.add(objNode);
+            } else {
+                objNode = nodes.get(objNodeInddx);
+            }
+            
+            NodeLink link = new NodeLink();
+            
+            link.setNode(objNode);            
+            link.setDependendcy(t.rel);
+            
+            subNode.addNodeLink(link);
+        }
         
         
         
-        //dict.printAllWord();
+        
+        
+       
     }
 }
